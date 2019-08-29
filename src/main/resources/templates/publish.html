@@ -17,7 +17,7 @@
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Laodu's main page</span>
             </button>
-            <a class="navbar-brand" href="#">Laodu</a>
+            <a class="navbar-brand" href="/">Laodu</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -47,38 +47,43 @@
     </div>
 </nav>
 
-    <div class="container-fluid main">
-        <div class="row">
-            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-                <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Publish</h2>
-                <hr>
-                <form action="#">
-                    <div class="form-group">
-                        <label for="title">Title:</label>
-                        <input type="text" class="form-control" name="title" id="title" placeholder="title">
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description:</label>
-                        <textarea id="description" class="form-control" name="description" cols="30"
-                                  rows="10"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="title">Add tag:</label>
-                        <input type="text" class="form-control" name="tag" id="tag" placeholder="add tag">
-                    </div>
-                    <button type="submit" class="btn btn-success btn-publish">Submit</button>
-                </form>
+<div class="container-fluid main">
 
-            </div>
-            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                <h3>guide of publish</h3>
-                我是小妖怪
-                逍遥又自在
-                杀人不眨眼
-                吃人不放盐
-            </div>
+    <div class="alert alert-danger col-lg-9 col-md-12 col-sm-12 col-xs-12"
+         th:text="${err}" th:if="${err != null}">
+    </div>
+
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Publish</h2>
+            <hr>
+            <form action="/publish" method="post">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" class="form-control" name="title" id="title" placeholder="title">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" class="form-control" name="description" cols="30"
+                              rows="10"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="title">Add tag:</label>
+                    <input type="text" class="form-control" name="tag" id="tag" placeholder="add tag">
+                </div>
+                <button type="submit" class="btn btn-success btn-publish">Submit</button>
+            </form>
+
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h3>guide of publish</h3>
+            我是小妖怪
+            逍遥又自在
+            杀人不眨眼
+            吃人不放盐
         </div>
     </div>
+</div>
 
 
 </body>
