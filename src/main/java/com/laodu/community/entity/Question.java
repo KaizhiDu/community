@@ -14,4 +14,5 @@ public class Question {
     private int viewCount;
     private int commentCount;
     private int likeCount;
+    private int aaaa;
 }
