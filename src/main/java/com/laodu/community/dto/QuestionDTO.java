@@ -1,9 +1,10 @@
-package com.laodu.community.entity;
+package com.laodu.community.dto;
 
+import com.laodu.community.entity.User;
 import lombok.Data;
 
 @Data
-public class Question {
+public class QuestionDTO {
     private int id;
     private String title;
     private String description;
@@ -14,4 +15,7 @@ public class Question {
     private int viewCount;
     private int commentCount;
     private int likeCount;
+    private User user;
+    private String createDate;
+
 }

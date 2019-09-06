@@ -15,7 +15,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-//@RequestMapping("/publish")
 public class publishController {
 
     @Autowired
@@ -56,7 +55,6 @@ public class publishController {
             question.setCreator(user.getId());
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
-            question.setAvatarUrl(user.getAvatarUrl());
             questionMapper.insert(question);
             return "redirect:/";
         }

@@ -2,10 +2,15 @@ package com.laodu.community.controller;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.laodu.community.dto.QuestionDTO;
+import com.laodu.community.entity.Question;
 import com.laodu.community.entity.User;
+import com.laodu.community.mapper.QuestionMapper;
 import com.laodu.community.mapper.UserMapper;
+import com.laodu.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.management.Query;
@@ -20,8 +25,11 @@ public class IndexController {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private QuestionService questionService;
+
     @RequestMapping("/")
-    public String hello(HttpServletResponse res, HttpServletRequest req) {
+    public String hello(HttpServletResponse res, HttpServletRequest req, Model model) {
         Cookie[] cookies = req.getCookies();
         if (cookies.length != 0) {
             for (Cookie cookie : cookies ) {
@@ -37,6 +45,8 @@ public class IndexController {
                 }
             }
         }
+        List<QuestionDTO> questionDTO = questionService.getQuestionDTO();
+        model.addAttribute("questionDTO", questionDTO);
         return "index";
     }
 
