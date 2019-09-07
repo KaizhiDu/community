@@ -17,5 +17,4 @@ public class QuestionDTO {
     private int likeCount;
     private User user;
     private String createDate;
-
 }
