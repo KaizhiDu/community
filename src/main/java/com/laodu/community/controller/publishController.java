@@ -1,6 +1,5 @@
 package com.laodu.community.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.laodu.community.entity.Question;
 import com.laodu.community.entity.User;
 import com.laodu.community.mapper.QuestionMapper;
@@ -11,14 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class publishController {
-
-    @Autowired
-    private UserMapper userMapper;
 
     @Autowired
     private QuestionMapper questionMapper;
@@ -36,19 +31,8 @@ public class publishController {
             return "publish";
         }
 
-        Cookie[] cookies = req.getCookies();
-        User user = null;
-        if (cookies.length != 0) {
-            for (Cookie cookie : cookies ) {
-                if (cookie.getName().equals("token")) {
-                    String token = cookie.getValue();
-                    QueryWrapper<User> wrapper = new QueryWrapper<>();
-                    wrapper.eq("token", token);
-                    user = userMapper.selectOne(wrapper);
-                    break;
-                }
-            }
-        }
+        User user = (User) req.getSession().getAttribute("user");
+
         if (user == null) {
             model.addAttribute("err", "you need to login before publish");
         } else {
