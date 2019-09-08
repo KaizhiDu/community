@@ -41,6 +41,18 @@ public class QuestionServiceImpl implements QuestionService {
         return questionDTOS;
     }
 
+    @Override
+    public QuestionDTO getQuestion(int id) {
+        Question question = questionMapper.selectById(id);
+        User user = userMapper.selectById(question.getCreator());
+        QuestionDTO questionDTO = new QuestionDTO();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy");
+        BeanUtils.copyProperties(question, questionDTO);
+        questionDTO.setUser(user);
+        questionDTO.setCreateDate(simpleDateFormat.format(question.getGmtCreate()));
+        return questionDTO;
+    }
+
     public List<QuestionDTO> getQuestionDTOList(int currentPage, int size, QueryWrapper<Question> wrapper) {
         IPage<Question> page = new Page<>(currentPage, size);
         IPage<Question> questionIPage = questionMapper.selectPage(page, wrapper);

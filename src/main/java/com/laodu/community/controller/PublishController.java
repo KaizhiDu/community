@@ -3,7 +3,6 @@ package com.laodu.community.controller;
 import com.laodu.community.entity.Question;
 import com.laodu.community.entity.User;
 import com.laodu.community.mapper.QuestionMapper;
-import com.laodu.community.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class publishController {
+public class PublishController {
 
     @Autowired
     private QuestionMapper questionMapper;

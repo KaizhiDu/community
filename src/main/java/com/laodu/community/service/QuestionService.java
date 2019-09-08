@@ -9,4 +9,6 @@ public interface QuestionService {
     public List<QuestionDTO> getQuestionDTO(int page, int size);
 
     public List<QuestionDTO> getQuestionDTOByUser(int id, int page, int size);
+
+    public QuestionDTO getQuestion(int id);
 }
