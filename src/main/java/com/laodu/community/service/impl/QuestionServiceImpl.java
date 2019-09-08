@@ -12,7 +12,6 @@ import com.laodu.community.service.QuestionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,8 +29,20 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public List<QuestionDTO> getQuestionDTO(int currentPage, int size) {
         QueryWrapper<Question> wrapper = new QueryWrapper<>();
+        List<QuestionDTO> questionDTOS = getQuestionDTOList(currentPage, size, wrapper);
+        return questionDTOS;
+    }
+
+    @Override
+    public List<QuestionDTO> getQuestionDTOByUser(int id, int currentPage, int size) {
+        QueryWrapper<Question> wrapper = new QueryWrapper<>();
+        wrapper.eq("creator", id);
+        List<QuestionDTO> questionDTOS = getQuestionDTOList(currentPage, size, wrapper);
+        return questionDTOS;
+    }
+
+    public List<QuestionDTO> getQuestionDTOList(int currentPage, int size, QueryWrapper<Question> wrapper) {
         IPage<Question> page = new Page<>(currentPage, size);
-        //IPage<Question> questionDTOIPage = questionMapper.selectByPage(page, wrapper);
         IPage<Question> questionIPage = questionMapper.selectPage(page, wrapper);
         List<QuestionDTO> questionDTOS = new ArrayList<>();
         for (Question q : questionIPage.getRecords()) {
