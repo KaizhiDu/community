@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -61,4 +63,16 @@ public class ProfileController {
         model.addAttribute("pagination", pagination);
         return "profile";
     }
+
+    @GetMapping("/profile/logout")
+    public String logout(HttpServletRequest req,
+                         HttpServletResponse res) {
+        req.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("token", null);
+        cookie.setPath("/");//这一点很重要
+        cookie.setMaxAge(0);
+        res.addCookie(cookie);
+        return "redirect:/";
+    }
+
 }

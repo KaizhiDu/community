@@ -32,10 +32,13 @@
 
             <hr><hr>
 
-            <a th:href="@{'/publish/'+${question.id}}">
-                <span class="glyphicon glyphicon-pencil community-menu" aria-hidden="true"></span>
-                <span th:class="community-menu" th:text="Edit"></span>
-            </a>
+            <div th:if="${user!=null && question.creator == user.id}">
+                <a th:href="@{'/publish/'+${question.id}}">
+                    <span class="glyphicon glyphicon-pencil community-menu" aria-hidden="true"></span>
+                    <span th:class="community-menu" th:text="Edit"></span>
+                </a>
+            </div>
+
 
         </div>
 
