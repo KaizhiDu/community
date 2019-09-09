@@ -3,11 +3,11 @@
 <head>
     <title>publish</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/community.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/community.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -25,22 +25,22 @@
             <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Publish</h2>
             <hr>
             <form action="/publish" method="post">
+                <input type="hidden" id="id" name="id" th:value="${id}">
                 <div class="form-group">
                     <label for="title">Title:</label>
-                    <input type="text" class="form-control" name="title" id="title" placeholder="title">
+                    <input type="text" th:value="${question.title}" class="form-control" name="title" id="title" placeholder="title">
                 </div>
                 <div class="form-group">
                     <label for="description">Description:</label>
-                    <textarea id="description" class="form-control" name="description" cols="30"
+                    <textarea th:text="${question.description}" id="description" class="form-control" name="description" cols="30"
                               rows="10"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="title">Add tag:</label>
-                    <input type="text" class="form-control" name="tag" id="tag" placeholder="add tag">
+                    <input th:value="${question.tag}" type="text" class="form-control" name="tag" id="tag" placeholder="add tag">
                 </div>
                 <button type="submit" class="btn btn-success btn-publish">Submit</button>
             </form>
-
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <h3>guide of publish</h3>
