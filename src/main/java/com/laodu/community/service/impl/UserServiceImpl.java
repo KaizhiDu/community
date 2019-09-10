@@ -2,13 +2,15 @@ package com.laodu.community.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.laodu.community.entity.User;
+import com.laodu.community.exception.CustomizeErrorCode;
+import com.laodu.community.exception.CustomizeException;
 import com.laodu.community.mapper.UserMapper;
-import com.laodu.community.service.UserService;
+import com.laodu.community.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 
     @Autowired
     private UserMapper userMapper;
@@ -27,7 +29,10 @@ public class UserServiceImpl implements UserService {
             currentUser.setToken(user.getToken());
             currentUser.setName(user.getName());
             currentUser.setAvatarUrl(user.getAvatarUrl());
-            userMapper.updateById(currentUser);
+            int i = userMapper.updateById(currentUser);
+            if (i != 1) {
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
         }
     }
 }

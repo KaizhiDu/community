@@ -7,7 +7,7 @@ import com.laodu.community.entity.Question;
 import com.laodu.community.entity.User;
 import com.laodu.community.helper.PaginationHelper;
 import com.laodu.community.mapper.QuestionMapper;
-import com.laodu.community.service.QuestionService;
+import com.laodu.community.service.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +27,7 @@ public class ProfileController {
     private QuestionMapper questionMapper;
 
     @Autowired
-    private QuestionService questionService;
+    private IQuestionService IQuestionService;
 
     @GetMapping("/profile/{action}")
     public String profile(@PathVariable(name = "action") String action,
@@ -53,7 +53,7 @@ public class ProfileController {
             break;
         }
 
-        List<QuestionDTO> questionDTOByUser = questionService.getQuestionDTOByUser(user.getId(), page, size);
+        List<QuestionDTO> questionDTOByUser = IQuestionService.getQuestionDTOByUser(user.getId(), page, size);
         model.addAttribute("questions", questionDTOByUser);
         PaginationHelper paginationHelper = new PaginationHelper();
         QueryWrapper<Question> wrapper = new QueryWrapper<>();

@@ -3,9 +3,8 @@ package com.laodu.community.controller;
 import com.laodu.community.dto.AccessTokenDTO;
 import com.laodu.community.dto.GithubUser;
 import com.laodu.community.entity.User;
-import com.laodu.community.mapper.UserMapper;
 import com.laodu.community.provider.GithubProvider;
-import com.laodu.community.service.UserService;
+import com.laodu.community.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -24,7 +23,7 @@ public class AuthorizeController {
     private GithubProvider githubProvider;
 
     @Autowired
-    private UserService userService;
+    private IUserService IUserService;
 
     @Value("${github.client.id}")
     private String clientId;
@@ -57,7 +56,7 @@ public class AuthorizeController {
             user.setName(githubUser.getName());
             user.setAvatarUrl(githubUser.getAvatar_url());
             user.setAccountId(String.valueOf(githubUser.getId()));
-            userService.createOrUpdateUser(githubUser.getId(), user);
+            IUserService.createOrUpdateUser(githubUser.getId(), user);
             res.addCookie(new Cookie("token", token));
             return "redirect:/";
         } else {

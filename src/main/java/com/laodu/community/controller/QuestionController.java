@@ -2,7 +2,7 @@ package com.laodu.community.controller;
 
 import com.laodu.community.dto.QuestionDTO;
 import com.laodu.community.entity.User;
-import com.laodu.community.service.QuestionService;
+import com.laodu.community.service.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,14 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 public class QuestionController {
 
     @Autowired
-    private QuestionService questionService;
+    private IQuestionService IQuestionService;
 
     @GetMapping("/question/{id}")
     public String getQuestion(@PathVariable(name = "id") int id,
                               Model model,
                               HttpServletRequest req) {
 
-        QuestionDTO question = questionService.getQuestion(id);
+        QuestionDTO question = IQuestionService.getQuestion(id);
         model.addAttribute("question", question);
         User user = (User) req.getSession().getAttribute("user");
         model.addAttribute("user", user);

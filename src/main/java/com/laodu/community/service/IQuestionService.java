@@ -4,7 +4,7 @@ import com.laodu.community.dto.QuestionDTO;
 
 import java.util.List;
 
-public interface QuestionService {
+public interface IQuestionService {
 
     public List<QuestionDTO> getQuestionDTO(int page, int size);
 

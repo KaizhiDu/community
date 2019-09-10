@@ -6,9 +6,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.laodu.community.dto.QuestionDTO;
 import com.laodu.community.entity.Question;
 import com.laodu.community.entity.User;
+import com.laodu.community.exception.CustomizeErrorCode;
+import com.laodu.community.exception.CustomizeException;
 import com.laodu.community.mapper.QuestionMapper;
 import com.laodu.community.mapper.UserMapper;
-import com.laodu.community.service.QuestionService;
+import com.laodu.community.service.IQuestionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class QuestionServiceImpl implements QuestionService {
+public class QuestionServiceImpl implements IQuestionService {
 
     @Autowired
     private UserMapper userMapper;
@@ -44,6 +46,9 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public QuestionDTO getQuestion(int id) {
         Question question = questionMapper.selectById(id);
+        if (question == null) {
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         User user = userMapper.selectById(question.getCreator());
         QuestionDTO questionDTO = new QuestionDTO();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy");

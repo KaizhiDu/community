@@ -4,7 +4,7 @@ import com.laodu.community.dto.PaginationDTO;
 import com.laodu.community.dto.QuestionDTO;
 import com.laodu.community.helper.PaginationHelper;
 import com.laodu.community.mapper.QuestionMapper;
-import com.laodu.community.service.QuestionService;
+import com.laodu.community.service.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +19,13 @@ public class IndexController {
     private QuestionMapper questionMapper;
 
     @Autowired
-    private QuestionService questionService;
+    private IQuestionService IQuestionService;
 
     @RequestMapping("/")
     public String hello(Model model,
                         @RequestParam(name = "page", defaultValue = "1")int page) {
         int size = 5;
-        List<QuestionDTO> questionDTO = questionService.getQuestionDTO(page, size);
+        List<QuestionDTO> questionDTO = IQuestionService.getQuestionDTO(page, size);
         model.addAttribute("questionDTO", questionDTO);
         PaginationHelper paginationHelper = new PaginationHelper();
         int total = questionMapper.selectCount(null);
