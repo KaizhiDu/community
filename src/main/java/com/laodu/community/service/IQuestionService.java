@@ -8,7 +8,7 @@ public interface IQuestionService {
 
     public List<QuestionDTO> getQuestionDTO(int page, int size);
 
-    public List<QuestionDTO> getQuestionDTOByUser(int id, int page, int size);
+    public List<QuestionDTO> getQuestionDTOByUser(Long id, int page, int size);
 
-    public QuestionDTO getQuestion(int id);
+    public QuestionDTO getQuestion(Long id);
 }

@@ -25,9 +25,9 @@ public class CustomizeErrorController implements ErrorController {
         if (status.is4xxClientError()) {
             model.addAttribute("message", "Wrong request url, please check");
         }
-        if (status.is5xxServerError()) {
-            model.addAttribute("message", "unknown error, please contact laodu");
-        }
+//        if (status.is5xxServerError()) {
+//            model.addAttribute("message", "unknown error, please contact laodu");
+//        }
         return new ModelAndView("error");
     }
 

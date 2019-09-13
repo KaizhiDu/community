@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-@ControllerAdvice(basePackageClasses = ExceptionHandlerAdvice.class)
+@ControllerAdvice
 public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(Exception.class)

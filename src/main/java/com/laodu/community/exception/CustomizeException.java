@@ -8,10 +8,6 @@ public class CustomizeException extends RuntimeException {
         this.message = errorCode.getMessage();
     }
 
-    public CustomizeException(String message) {
-        this.message = message;
-    }
-
     @Override
     public String getMessage() {
         return message;

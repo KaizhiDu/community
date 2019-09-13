@@ -57,7 +57,7 @@ public class PublishController {
             }
             // create
             else {
-                question.setId(0);
+                question.setId(0L);
                 question.setCreator(user.getId());
                 question.setGmtCreate(System.currentTimeMillis());
                 question.setGmtModified(question.getGmtCreate());

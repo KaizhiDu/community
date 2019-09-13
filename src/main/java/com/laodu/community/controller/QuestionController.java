@@ -18,7 +18,7 @@ public class QuestionController {
     private IQuestionService IQuestionService;
 
     @GetMapping("/question/{id}")
-    public String getQuestion(@PathVariable(name = "id") int id,
+    public String getQuestion(@PathVariable(name = "id") Long id,
                               Model model,
                               HttpServletRequest req) {
 

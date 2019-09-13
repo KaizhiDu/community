@@ -36,7 +36,7 @@ public class QuestionServiceImpl implements IQuestionService {
     }
 
     @Override
-    public List<QuestionDTO> getQuestionDTOByUser(int id, int currentPage, int size) {
+    public List<QuestionDTO> getQuestionDTOByUser(Long id, int currentPage, int size) {
         QueryWrapper<Question> wrapper = new QueryWrapper<>();
         wrapper.eq("creator", id);
         List<QuestionDTO> questionDTOS = getQuestionDTOList(currentPage, size, wrapper);
@@ -44,7 +44,7 @@ public class QuestionServiceImpl implements IQuestionService {
     }
 
     @Override
-    public QuestionDTO getQuestion(int id) {
+    public QuestionDTO getQuestion(Long id) {
         Question question = questionMapper.selectById(id);
         if (question == null) {
             throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
