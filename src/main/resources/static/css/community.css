@@ -2,9 +2,18 @@ body {
     background-color: #efefef;
 }
 
+.avartar-size {
+    width: 38px;
+    height: 38px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
 .main {
     background-color: white;
-    margin: 30px
+    margin: 30px;
 }
 
 .btn-publish {
@@ -24,4 +33,31 @@ body {
 
 .community-menu {
     color: #999;
+}
+
+.comment-menu {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.comment-menu:hover {
+    color: #499ef3;
+}
+
+.on-choose {
+    color: #499ef3;
+}
+
+.each-comment {
+    margin-top: 18px;
+    border-bottom: 1px solid;
+    border-bottom-color: #eee;
+}
+
+.secondary-comment {
+    margin-top: 10px;
+    border: 1px solid #eee;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
 }

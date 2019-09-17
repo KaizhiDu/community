@@ -49,6 +49,8 @@ public class QuestionServiceImpl implements IQuestionService {
         if (question == null) {
             throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
         }
+        question.setViewCount(question.getViewCount()+1);
+        questionMapper.updateById(question);
         User user = userMapper.selectById(question.getCreator());
         QuestionDTO questionDTO = new QuestionDTO();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy");
