@@ -18,22 +18,26 @@ import java.util.List;
 public class QuestionController {
 
     @Autowired
-    private IQuestionService IQuestionService;
+    private IQuestionService questionService;
 
     @Autowired
     private ICommentService commentService;
+
 
     @GetMapping("/question/{id}")
     public String getQuestion(@PathVariable(name = "id") Long id,
                               Model model,
                               HttpServletRequest req) {
 
-        QuestionDTO question = IQuestionService.getQuestion(id);
+        QuestionDTO question = questionService.getQuestion(id);
         model.addAttribute("question", question);
         User user = (User) req.getSession().getAttribute("user");
         model.addAttribute("user", user);
         List<CommentDTO> commentDTOS = commentService.selectByQorCId(id, 0);
         model.addAttribute("comments", commentDTOS);
+
+        List<QuestionDTO> questionRelateds = questionService.selectRelated(question);
+        model.addAttribute("questionRelateds", questionRelateds);
         return "question";
     }
 }

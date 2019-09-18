@@ -31,6 +31,7 @@ public class QuestionServiceImpl implements IQuestionService {
     @Override
     public List<QuestionDTO> getQuestionDTO(int currentPage, int size) {
         QueryWrapper<Question> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("gmt_create");
         List<QuestionDTO> questionDTOS = getQuestionDTOList(currentPage, size, wrapper);
         return questionDTOS;
     }
@@ -58,6 +59,28 @@ public class QuestionServiceImpl implements IQuestionService {
         questionDTO.setUser(user);
         questionDTO.setCreateDate(simpleDateFormat.format(question.getGmtCreate()));
         return questionDTO;
+    }
+
+    @Override
+    public List<QuestionDTO> selectRelated(QuestionDTO questionDTO) {
+        String tag = questionDTO.getTag();
+        QueryWrapper<Question> wrapper = new QueryWrapper<>();
+
+        String[] tags = tag.split(",");
+        for (String s : tags) {
+            wrapper.like("tag", s);
+            wrapper.or();
+        }
+        List<Question> questions = questionMapper.selectList(wrapper);
+        List<QuestionDTO> questionDTOs = new ArrayList<>();
+        for (Question q : questions) {
+            QuestionDTO questionDTO1 = new QuestionDTO();
+            BeanUtils.copyProperties(q, questionDTO1);
+            User user = userMapper.selectById(q.getCreator());
+            questionDTO1.setUser(user);
+            questionDTOs.add(questionDTO1);
+        }
+        return questionDTOs;
     }
 
     public List<QuestionDTO> getQuestionDTOList(int currentPage, int size, QueryWrapper<Question> wrapper) {

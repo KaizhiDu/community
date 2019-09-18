@@ -38,5 +38,4 @@ public class CustomizeErrorController implements ErrorController {
         }
         return HttpStatus.valueOf(statusCode);
     }
-
 }

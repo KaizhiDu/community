@@ -6,6 +6,7 @@ import com.laodu.community.helper.PaginationHelper;
 import com.laodu.community.mapper.QuestionMapper;
 import com.laodu.community.service.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +22,12 @@ public class IndexController {
     @Autowired
     private IQuestionService IQuestionService;
 
+    @Value("${page.size}")
+    private int size;
+
     @RequestMapping("/")
     public String hello(Model model,
                         @RequestParam(name = "page", defaultValue = "1")int page) {
-        int size = 5;
         List<QuestionDTO> questionDTO = IQuestionService.getQuestionDTO(page, size);
         model.addAttribute("questionDTO", questionDTO);
         PaginationHelper paginationHelper = new PaginationHelper();

@@ -9,6 +9,7 @@ import com.laodu.community.helper.PaginationHelper;
 import com.laodu.community.mapper.QuestionMapper;
 import com.laodu.community.service.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,13 +30,14 @@ public class ProfileController {
     @Autowired
     private IQuestionService IQuestionService;
 
+    @Value("${page.size}")
+    private int size;
+
     @GetMapping("/profile/{action}")
     public String profile(@PathVariable(name = "action") String action,
                           @RequestParam(name = "page", defaultValue = "1") int page,
                           Model model,
                           HttpServletRequest req) {
-        int size = 5;
-
         User user = (User) req.getSession().getAttribute("user");
 
         if (user == null) return "redirect:/";

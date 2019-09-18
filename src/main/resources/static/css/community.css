@@ -61,3 +61,10 @@ body {
     padding-bottom: 15px;
     margin-bottom: 15px;
 }
+
+.related-question {
+    list-style: none;
+    padding-left: 0;
+    font-size: 18px;
+    line-height: 20px;
+}
