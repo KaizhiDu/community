@@ -29,8 +29,7 @@ public class QuestionServiceImpl implements IQuestionService {
     private QuestionMapper questionMapper;
 
     @Override
-    public List<QuestionDTO> getQuestionDTO(int currentPage, int size) {
-        QueryWrapper<Question> wrapper = new QueryWrapper<>();
+    public List<QuestionDTO> getQuestionDTO(int currentPage, int size, QueryWrapper<Question> wrapper) {
         wrapper.orderByDesc("gmt_create");
         List<QuestionDTO> questionDTOS = getQuestionDTOList(currentPage, size, wrapper);
         return questionDTOS;

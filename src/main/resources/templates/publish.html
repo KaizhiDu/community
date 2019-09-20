@@ -11,6 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/editormd.min.js"></script>
+    <script src="/js/plugins/image-dialog/image-dialog.js"></script>
 
 
 
@@ -47,7 +48,10 @@
                         var editor = editormd("question-editor", {
                             width: "100%",
                             height: 350,
-                            path: "/js/lib/"
+                            path: "/js/lib/",
+                            imageUpload: true,
+                            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                            imageUploadURL:"/file/upload"
                         });
                     });
                 </script>
@@ -63,17 +67,12 @@
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
 
             <!-- 关于我 -->
-            <img src="/img/babao3.jpg" class="img-thumbnail" style="width: 100%; height: 60%">
+            <img src="/img/babao3.jpg" class="img-thumbnail" style="width: 100%; height: 60%; margin-top: 20px">
             <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <h3>guide of publish</h3>
-            我是小妖怪
-            逍遥又自在
-            杀人不眨眼
-            吃人不放盐
+
         </div>
     </div>
 </div>
-
 
 </body>
 </html>

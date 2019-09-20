@@ -9,6 +9,7 @@ import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,8 +20,10 @@ import javax.sql.DataSource;
 @MapperScan("com.laodu.community.mapper.*")
 public class MybatisPlusConfig {
 
+
+
     @Bean("mybatisSqlSession")
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) throws Exception {
+    public MybatisSqlSessionFactoryBean sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) throws Exception {
         MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
         MybatisConfiguration configuration = new MybatisConfiguration();
         configuration.setDefaultScriptingLanguage(MybatisXMLLanguageDriver.class);
@@ -33,10 +36,12 @@ public class MybatisPlusConfig {
 
         sqlSessionFactory.setConfiguration(configuration);
 
+
         // 添加分页插件，这里有个坑
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
         sqlSessionFactory.setPlugins(new Interceptor[]{paginationInterceptor});
 
-        return sqlSessionFactory.getObject();
+        return sqlSessionFactory;
     }
+
 }

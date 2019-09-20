@@ -16,6 +16,5 @@ public interface QuestionMapper extends BaseMapper<Question> {
     @Select("SELECT * FROM QUESTION")
     public IPage<Question> selectByPage(IPage page, @Param("ew") QueryWrapper queryWrapper);
 
-    @Select("SELECT * FROM QUESTION WHERE TAG REGEXP '#{tag}'")
-    public List<Question> selectRelated(Long id, String tag);
+    public List<Question> selectQuestion();
 }
